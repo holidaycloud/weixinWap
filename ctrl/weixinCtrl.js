@@ -17,9 +17,6 @@
         timeout: 3000,
         method: "GET"
       }, function(err, response, body) {
-        if (global.isDebug) {
-          console.log("WeixinCtrl.check cb:", err, body);
-        }
         if (err) {
           return fn(err);
         } else {
@@ -43,9 +40,6 @@
         }
       }, function(err, response, body) {
         var error, res;
-        if (global.isDebug) {
-          console.log("WeixinCtrl.msg cb:", err, body);
-        }
         if (err) {
           return fn(err);
         } else {

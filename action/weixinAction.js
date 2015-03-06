@@ -52,6 +52,7 @@
       var deferred;
       deferred = Q.defer();
       if (typeof WeixinCtrl[msgObj.xml.Event[0]] === "function") {
+        console.log("find function");
         WeixinCtrl[msgObj.xml.Event[0]](msgObj, function(err, results) {
           if (err) {
             return deferred.reject(err);
@@ -60,10 +61,13 @@
           }
         });
       } else {
+        console.log("not find function");
         deferred.resolve("");
+        deferred.reject("");
       }
       return deferred.promise;
     }).then(function(responseBody) {
+      console.log("all finished");
       return res.send(responseBody);
     });
   };
