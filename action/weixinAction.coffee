@@ -35,7 +35,6 @@ exports.msg = (req,res) ->
       deferred.promise
   ).then(
     (msgObj) ->
-      console.log msgObj
       deferred = Q.defer()
       if typeof WeixinCtrl[msgObj.xml.MsgType[0]] is "function"
         WeixinCtrl[msgObj.xml.MsgType[0]] msgObj,(err,results) ->

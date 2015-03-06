@@ -1,5 +1,6 @@
 request = require "request"
 config = require "./../config/config.json"
+CustomerCtrl = require "./customerCtrl"
 class WeixinCtrl
   @check:(signature,timestamp,nonce,echostr,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}?signature=#{signature}&timestamp=#{timestamp}&nonce=#{nonce}&echostr=#{echostr}"
@@ -27,7 +28,10 @@ class WeixinCtrl
   @event:(msgObj,fn) ->
     eventType = msgObj.xml.Event[0]
     console.log "#{eventType} event"
-    fn null,""
+    switch eventType
+      when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
+        fn err,res
+      else fn null,""
 
   @text:(msgObj,fn) ->
     console.log "say #{msgObj.xml.Content[0]}"
