@@ -14,7 +14,7 @@
       if (global.isDebug) {
         console.log("WeixinAction.check:", signature, timestamp, nonce, echostr, err, results);
       }
-      return res.send(results);
+      return res.send(results.toString());
     });
   };
 
