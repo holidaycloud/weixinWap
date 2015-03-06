@@ -26,7 +26,7 @@
         if (err) {
           return fn(err);
         } else {
-          return fn(body);
+          return fn(null, body);
         }
       });
     };

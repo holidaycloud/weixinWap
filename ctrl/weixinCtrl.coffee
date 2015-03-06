@@ -9,7 +9,7 @@ class WeixinCtrl
       if err
         fn err
       else
-        fn body
+        fn null,body
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
