@@ -11,20 +11,14 @@
 
     WeixinCtrl.check = function(signature, timestamp, nonce, echostr, fn) {
       var url;
-      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent;
+      url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent + "?signature=" + signature + "&timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr;
       if (global.isDebug) {
         console.log("WeixinCtrl.check:", url, signature, timestamp, nonce, echostr);
       }
       return request({
         url: url,
         timeout: 3000,
-        method: "GET",
-        form: {
-          signature: signature,
-          timestamp: timestamp,
-          nonce: nonce,
-          echostr: echostr
-        }
+        method: "GET"
       }, function(err, response, body) {
         var error, res;
         if (global.isDebug) {

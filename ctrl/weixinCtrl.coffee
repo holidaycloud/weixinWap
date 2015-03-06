@@ -2,9 +2,9 @@ request = require "request"
 config = require "./../config/config.json"
 class WeixinCtrl
   @check:(signature,timestamp,nonce,echostr,fn) ->
-    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
+    url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}?signature=#{signature}&timestamp=#{timestamp}&nonce=#{nonce}&echostr=#{echostr}"
     console.log "WeixinCtrl.check:",url,signature,timestamp,nonce,echostr if global.isDebug
-    request {url,timeout:3000,method:"GET",form: {signature,timestamp,nonce,echostr}},(err,response,body) ->
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
       console.log "WeixinCtrl.check cb:",err,body if global.isDebug
       if err
         fn err
