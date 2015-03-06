@@ -20,6 +20,8 @@
     "connect-flash":"*",
     "xml2js":"*",
     "compression":"*",
-    "socket.io":"*"
+    "socket.io":"*",
+    "async":"*",
+    "promise":"*"
   }
 }
