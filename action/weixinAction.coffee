@@ -23,6 +23,8 @@ exports.msg = (req,res) ->
     req.on "error",(e) ->
       deferred.reject e
 
+    return deferred.promise;
+
   bodyReader req.then (results) ->
     msg = results
     WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->

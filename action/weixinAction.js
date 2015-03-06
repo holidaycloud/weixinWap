@@ -35,9 +35,10 @@
       req.on("end", function() {
         return deferred.resolve(_data);
       });
-      return req.on("error", function(e) {
+      req.on("error", function(e) {
         return deferred.reject(e);
       });
+      return deferred.promise;
     };
     return bodyReader(req.then(function(results) {
       var msg;
