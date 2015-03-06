@@ -25,7 +25,6 @@ class WeixinCtrl
           fn new Error("Parse Error")
 
   @subscribe:(msgObj,fn) ->
-    console.log msgObj if global.isDebug
     fn null,""
 
 

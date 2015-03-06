@@ -59,9 +59,6 @@
     };
 
     WeixinCtrl.subscribe = function(msgObj, fn) {
-      if (global.isDebug) {
-        console.log(msgObj);
-      }
       return fn(null, "");
     };
 

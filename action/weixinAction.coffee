@@ -35,21 +35,19 @@ exports.msg = (req,res) ->
       deferred.promise
   ).then(
     (msgObj) ->
+      console.log msgObj
       deferred = Q.defer()
       if typeof WeixinCtrl[msgObj.xml.Event[0]] is "function"
-        console.log "find function"
         WeixinCtrl[msgObj.xml.Event[0]] msgObj,(err,results) ->
           if err
             deferred.reject err
           else
             deferred.resolve results
       else
-        console.log "not find function"
         deferred.resolve ""
         deferred.reject ""
       deferred.promise
   ).then(
     (responseBody) ->
-      console.log "all finished"
       res.send responseBody
   )
