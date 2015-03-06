@@ -40,7 +40,7 @@
       });
       return deferred.promise;
     };
-    return bodyReader(req.then(function(results) {
+    return bodyReader(req).then(function(results) {
       var msg;
       msg = results;
       return WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {
@@ -49,7 +49,7 @@
         }
         return res.send(results);
       });
-    }));
+    });
   };
 
 }).call(this);

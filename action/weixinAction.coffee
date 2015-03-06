@@ -25,7 +25,7 @@ exports.msg = (req,res) ->
 
     return deferred.promise;
 
-  bodyReader req.then (results) ->
+  bodyReader(req).then (results) ->
     msg = results
     WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->
       console.log "WeixinAction.msg:",signature,timestamp,nonce,msg,err,results if global.isDebug
