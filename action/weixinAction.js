@@ -50,6 +50,7 @@
       return deferred.promise;
     }).then(function(msgObj) {
       var deferred;
+      console.log(msgObj);
       deferred = Q.defer();
       if (typeof WeixinCtrl[msgObj.xml.MsgType[0]] === "function") {
         WeixinCtrl[msgObj.xml.MsgType[0]](msgObj, function(err, results) {
