@@ -27,12 +27,12 @@ exports.msg = (req,res) ->
   bodyReader().then(
     (data) ->
       deferred = Q.defer()
-      WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->
+      WeixinCtrl.msg signature,timestamp,nonce,data,(err,results) ->
         if err
           deferred.reject err
         else
           deferred.resolve results
-        return deferred.promise
+      return deferred.promise
   ).then(
     (msgObj) ->
       console.log msgObj if global.isDebug

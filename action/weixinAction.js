@@ -40,14 +40,14 @@
     return bodyReader().then(function(data) {
       var deferred;
       deferred = Q.defer();
-      return WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {
+      WeixinCtrl.msg(signature, timestamp, nonce, data, function(err, results) {
         if (err) {
-          deferred.reject(err);
+          return deferred.reject(err);
         } else {
-          deferred.resolve(results);
+          return deferred.resolve(results);
         }
-        return deferred.promise;
       });
+      return deferred.promise;
     }).then(function(msgObj) {
       if (global.isDebug) {
         console.log(msgObj);
