@@ -51,7 +51,7 @@
     }).then(function(msgObj) {
       var deferred;
       deferred = Q.defer();
-      if (WeixinCtrl[msgObj.xml.Event[0]] === "function") {
+      if (typeof WeixinCtrl[msgObj.xml.Event[0]] === "function") {
         WeixinCtrl[msgObj.xml.Event[0]](msgObj, function(err, results) {
           if (err) {
             return deferred.reject(err);

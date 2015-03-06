@@ -36,7 +36,7 @@ exports.msg = (req,res) ->
   ).then(
     (msgObj) ->
       deferred = Q.defer()
-      if WeixinCtrl[msgObj.xml.Event[0]] is "function"
+      if typeof WeixinCtrl[msgObj.xml.Event[0]] is "function"
         WeixinCtrl[msgObj.xml.Event[0]] msgObj,(err,results) ->
           if err
             deferred.reject err
