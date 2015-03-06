@@ -58,7 +58,15 @@
       });
     };
 
-    WeixinCtrl.subscribe = function(msgObj, fn) {
+    WeixinCtrl.event = function(msgObj, fn) {
+      var eventType;
+      eventType = msgObj.xml.Event[0];
+      console.log("" + eventType + " event");
+      return fn(null, "");
+    };
+
+    WeixinCtrl.text = function(msgObj, fn) {
+      console.log("say " + msgObj.xml.Content[0]);
       return fn(null, "");
     };
 

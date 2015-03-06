@@ -24,7 +24,13 @@ class WeixinCtrl
         catch error
           fn new Error("Parse Error")
 
-  @subscribe:(msgObj,fn) ->
+  @event:(msgObj,fn) ->
+    eventType = msgObj.xml.Event[0]
+    console.log "#{eventType} event"
+    fn null,""
+
+  @text:(msgObj,fn) ->
+    console.log "say #{msgObj.xml.Content[0]}"
     fn null,""
 
 
