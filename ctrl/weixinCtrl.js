@@ -67,6 +67,7 @@
       switch (eventType) {
         case "subscribe":
           return CustomerCtrl.weixinSubscribe(msgObj.xml.FromUserName[0], function(err, res) {
+            console.log(err, res);
             return fn(err, res);
           });
         default:

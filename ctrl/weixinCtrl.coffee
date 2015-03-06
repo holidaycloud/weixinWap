@@ -30,6 +30,7 @@ class WeixinCtrl
     console.log "#{eventType} event"
     switch eventType
       when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
+        console.log err,res
         fn err,res
       else fn null,""
 
