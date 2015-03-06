@@ -22,7 +22,7 @@ exports.msg = (req,res) ->
       deferred.resolve _data
     req.on "error",(e) ->
       deferred.reject e
-    return deferred.promise;
+    deferred.promise;
 
   bodyReader().then(
     (data) ->
@@ -32,9 +32,20 @@ exports.msg = (req,res) ->
           deferred.reject err
         else
           deferred.resolve results
-      return deferred.promise
+      deferred.promise
   ).then(
     (msgObj) ->
-      console.log msgObj if global.isDebug
-      res.send ""
+      deferred = Q.defer()
+      if WeixinCtrl[msgObj.xml.Event[0]] is "function"
+        WeixinCtrl[msgObj.xml.Event[0]] msgObj,(err,results) ->
+          if err
+            deferred.reject err
+          else
+            deferred.resolve results
+      else
+        deferred.resolve ""
+      deferred.promise
+  ).then(
+    (responseBody) ->
+      res.send responseBody
   )

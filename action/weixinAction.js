@@ -49,10 +49,22 @@
       });
       return deferred.promise;
     }).then(function(msgObj) {
-      if (global.isDebug) {
-        console.log(msgObj);
+      var deferred;
+      deferred = Q.defer();
+      if (WeixinCtrl[msgObj.xml.Event[0]] === "function") {
+        WeixinCtrl[msgObj.xml.Event[0]](msgObj, function(err, results) {
+          if (err) {
+            return deferred.reject(err);
+          } else {
+            return deferred.resolve(results);
+          }
+        });
+      } else {
+        deferred.resolve("");
       }
-      return res.send("");
+      return deferred.promise;
+    }).then(function(responseBody) {
+      return res.send(responseBody);
     });
   };
 
