@@ -21,13 +21,27 @@
   };
 
   exports.msg = function(req, res) {
-    var msg, nonce, signature, timestamp;
+    var bodyReader, nonce, signature, timestamp;
     signature = req.query.signature;
     timestamp = req.query.timestamp;
     nonce = req.query.nonce;
-    console.log("body", req.body);
-    msg = req.body.msg;
-    return WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {
+    bodyReader = new Promise(function(resolve, reject) {
+      var _data;
+      _data = "";
+      req.on("data", function(chunk) {
+        return _data += chunk;
+      });
+      req.on("end", function() {
+        return resolve(_data);
+      });
+      return req.on("error", function(e) {
+        return reject(e);
+      });
+    });
+    return bodyReader().then(function(res) {
+      var msg;
+      msg = res;
+      WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {});
       if (global.isDebug) {
         console.log("WeixinAction.msg:", signature, timestamp, nonce, msg, err, results);
       }

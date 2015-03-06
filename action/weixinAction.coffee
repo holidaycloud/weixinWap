@@ -13,8 +13,16 @@ exports.msg = (req,res) ->
   signature = req.query.signature
   timestamp = req.query.timestamp
   nonce = req.query.nonce
-  console.log "body",req.body
-  msg = req.body.msg
-  WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->
+  bodyReader = new Promise (resolve, reject) ->
+    _data = ""
+    req.on "data",(chunk) ->
+      _data += chunk
+    req.on "end",() ->
+      resolve _data
+    req.on "error",(e) ->
+      reject e
+  bodyReader().then (res) ->
+    msg = res
+    WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->
     console.log "WeixinAction.msg:",signature,timestamp,nonce,msg,err,results if global.isDebug
     res.send results
