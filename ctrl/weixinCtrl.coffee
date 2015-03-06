@@ -4,7 +4,7 @@ class WeixinCtrl
   @check:(signature,timestamp,nonce,echostr,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
     console.log "WeixinCtrl.check:",url,signature,timestamp,nonce,echostr if global.isDebug
-    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+    request {url,timeout:3000,method:"GET",form: {signature,timestamp,nonce,echostr}},(err,response,body) ->
       console.log "WeixinCtrl.check cb:",err,body if global.isDebug
       if err
         fn err
@@ -20,7 +20,7 @@ class WeixinCtrl
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
-    request {url,timeout:3000,method:"POST"},(err,response,body) ->
+    request {url,timeout:3000,method:"POST",form: {signature,timestamp,nonce,msg}},(err,response,body) ->
       console.log "WeixinCtrl.check:",err,body if global.isDebug
       if err
         fn err

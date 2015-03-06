@@ -18,7 +18,13 @@
       return request({
         url: url,
         timeout: 3000,
-        method: "GET"
+        method: "GET",
+        form: {
+          signature: signature,
+          timestamp: timestamp,
+          nonce: nonce,
+          echostr: echostr
+        }
       }, function(err, response, body) {
         var error, res;
         if (global.isDebug) {
@@ -48,7 +54,13 @@
       return request({
         url: url,
         timeout: 3000,
-        method: "POST"
+        method: "POST",
+        form: {
+          signature: signature,
+          timestamp: timestamp,
+          nonce: nonce,
+          msg: msg
+        }
       }, function(err, response, body) {
         var error, res;
         if (global.isDebug) {
