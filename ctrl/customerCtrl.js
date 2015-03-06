@@ -11,7 +11,7 @@
 
     CustomerCtrl.weixinSubscribe = function(openid, fn) {
       var url;
-      url = "" + config.inf.host + ":" + config.inf.port + "/customer/weixinSubscribe";
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinSubscribe";
       return request({
         url: url,
         timeout: 3000,
