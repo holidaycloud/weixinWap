@@ -13,9 +13,6 @@
     nonce = req.query.nonce;
     echostr = req.query.echostr;
     return WeixinCtrl.check(signature, timestamp, nonce, echostr, function(err, results) {
-      if (global.isDebug) {
-        console.log("WeixinAction.check:", signature, timestamp, nonce, echostr, err, results);
-      }
       return res.send(results);
     });
   };
@@ -25,7 +22,7 @@
     signature = req.query.signature;
     timestamp = req.query.timestamp;
     nonce = req.query.nonce;
-    bodyReader = function(req) {
+    bodyReader = function() {
       var deferred, _data;
       deferred = Q.defer();
       _data = "";
@@ -40,15 +37,22 @@
       });
       return deferred.promise;
     };
-    return bodyReader(req).then(function(results) {
-      var msg;
-      msg = results;
+    return bodyReader().then(function(data) {
+      var deferred;
+      deferred = Q.defer();
       return WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {
-        if (global.isDebug) {
-          console.log("WeixinAction.msg:", signature, timestamp, nonce, msg, err, results);
+        if (err) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve(results);
         }
-        return res.send(results);
+        return deferred.promise;
       });
+    }).then(function(msgObj) {
+      if (global.isDebug) {
+        console.log(msgObj);
+      }
+      return res.send("");
     });
   };
 
