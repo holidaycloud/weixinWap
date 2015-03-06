@@ -26,7 +26,7 @@
     msg = req.body.msg;
     return WeixinCtrl.msg(signature, timestamp, nonce, msg, function(err, results) {
       if (global.isDebug) {
-        console.log("WeixinAction.msg:", err, results);
+        console.log("WeixinAction.msg:", signature, timestamp, nonce, msg, err, results);
       }
       return res.send(results);
     });

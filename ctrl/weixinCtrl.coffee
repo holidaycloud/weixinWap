@@ -13,8 +13,9 @@ class WeixinCtrl
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
+    console.log "WeixinCtrl.msg:",url,signature,timestamp,nonce,msg if global.isDebug
     request {url,timeout:3000,method:"POST",form: {signature,timestamp,nonce,msg}},(err,response,body) ->
-      console.log "WeixinCtrl.check:",err,body if global.isDebug
+      console.log "WeixinCtrl.msg cb:",err,body if global.isDebug
       if err
         fn err
       else

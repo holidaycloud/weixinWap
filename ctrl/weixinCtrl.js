@@ -34,6 +34,9 @@
     WeixinCtrl.msg = function(signature, timestamp, nonce, msg, fn) {
       var url;
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent;
+      if (global.isDebug) {
+        console.log("WeixinCtrl.msg:", url, signature, timestamp, nonce, msg);
+      }
       return request({
         url: url,
         timeout: 3000,
@@ -47,7 +50,7 @@
       }, function(err, response, body) {
         var error, res;
         if (global.isDebug) {
-          console.log("WeixinCtrl.check:", err, body);
+          console.log("WeixinCtrl.msg cb:", err, body);
         }
         if (err) {
           return fn(err);

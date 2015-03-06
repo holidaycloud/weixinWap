@@ -14,5 +14,5 @@ exports.msg = (req,res) ->
   nonce = req.body.nonce
   msg = req.body.msg
   WeixinCtrl.msg signature,timestamp,nonce,msg,(err,results) ->
-    console.log "WeixinAction.msg:",err,results if global.isDebug
+    console.log "WeixinAction.msg:",signature,timestamp,nonce,msg,err,results if global.isDebug
     res.send results
