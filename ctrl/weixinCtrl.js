@@ -16,7 +16,7 @@
         url: url,
         timeout: 3000,
         method: "GET"
-      }, function(err, response, body) {
+      }, function(url, signature, timestamp, nonce, echostr, err, response, body) {
         var error, res;
         if (global.isDebug) {
           console.log("WeixinCtrl.check:", err, body);
