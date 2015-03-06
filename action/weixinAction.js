@@ -67,6 +67,9 @@
       return deferred.promise;
     }).then(function(responseBody) {
       return res.send(responseBody);
+    })["catch"](function(error) {
+      console.log(error);
+      return res.send("");
     });
   };
 

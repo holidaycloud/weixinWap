@@ -50,4 +50,8 @@ exports.msg = (req,res) ->
   ).then(
     (responseBody) ->
       res.send responseBody
+  ).catch(
+    (error) ->
+      console.log error
+      res.send ""
   )
