@@ -5,7 +5,7 @@ exports.check = (req,res) ->
   nonce = req.query.nonce
   echostr = req.query.echostr
   WeixinCtrl.check signature,timestamp,nonce,echostr,(err,results) ->
-    console.log "WeixinAction.check:",err,results if global.isDebug
+    console.log "WeixinAction.check:",signature,timestamp,nonce,echostr,err,results if global.isDebug
     res.send results
 
 exports.msg = (req,res) ->

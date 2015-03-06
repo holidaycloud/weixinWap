@@ -12,7 +12,7 @@
     echostr = req.query.echostr;
     return WeixinCtrl.check(signature, timestamp, nonce, echostr, function(err, results) {
       if (global.isDebug) {
-        console.log("WeixinAction.check:", err, results);
+        console.log("WeixinAction.check:", signature, timestamp, nonce, echostr, err, results);
       }
       return res.send(results);
     });
