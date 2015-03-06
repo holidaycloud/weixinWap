@@ -12,14 +12,17 @@
     WeixinCtrl.check = function(signature, timestamp, nonce, echostr, fn) {
       var url;
       url = "" + config.weixin.host + ":" + config.weixin.port + "/weixin/" + global.ent;
+      if (global.isDebug) {
+        console.log("WeixinCtrl.check:", url, signature, timestamp, nonce, echostr);
+      }
       return request({
         url: url,
         timeout: 3000,
         method: "GET"
-      }, function(url, signature, timestamp, nonce, echostr, err, response, body) {
+      }, function(err, response, body) {
         var error, res;
         if (global.isDebug) {
-          console.log("WeixinCtrl.check:", err, body);
+          console.log("WeixinCtrl.check cb:", err, body);
         }
         if (err) {
           return fn(err);

@@ -3,8 +3,9 @@ config = require "./../config/config.json"
 class WeixinCtrl
   @check:(signature,timestamp,nonce,echostr,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"
-    request {url,timeout:3000,method:"GET"},(url,signature,timestamp,nonce,echostr,err,response,body) ->
-      console.log "WeixinCtrl.check:",err,body if global.isDebug
+    console.log "WeixinCtrl.check:",url,signature,timestamp,nonce,echostr if global.isDebug
+    request {url,timeout:3000,method:"GET"},(err,response,body) ->
+      console.log "WeixinCtrl.check cb:",err,body if global.isDebug
       if err
         fn err
       else
@@ -32,4 +33,5 @@ class WeixinCtrl
             fn null,res
         catch error
           fn new Error("Parse Error")
+
 module.exports = WeixinCtrl
