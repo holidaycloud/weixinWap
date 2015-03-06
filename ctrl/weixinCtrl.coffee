@@ -9,14 +9,7 @@ class WeixinCtrl
       if err
         fn err
       else
-        try
-          res = JSON.parse(body)
-          if res.error? is 1
-            fn new Error(res.errMsg)
-          else
-            fn null,res
-        catch error
-          fn new Error("Parse Error")
+        fn body
 
   @msg:(signature,timestamp,nonce,msg,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}"

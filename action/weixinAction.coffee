@@ -6,7 +6,7 @@ exports.check = (req,res) ->
   echostr = req.query.echostr
   WeixinCtrl.check signature,timestamp,nonce,echostr,(err,results) ->
     console.log "WeixinAction.check:",signature,timestamp,nonce,echostr,err,results if global.isDebug
-    res.send results.toString()
+    res.send results
 
 exports.msg = (req,res) ->
   signature = req.body.signature

@@ -20,24 +20,13 @@
         timeout: 3000,
         method: "GET"
       }, function(err, response, body) {
-        var error, res;
         if (global.isDebug) {
           console.log("WeixinCtrl.check cb:", err, body);
         }
         if (err) {
           return fn(err);
         } else {
-          try {
-            res = JSON.parse(body);
-            if ((res.error != null) === 1) {
-              return fn(new Error(res.errMsg));
-            } else {
-              return fn(null, res);
-            }
-          } catch (_error) {
-            error = _error;
-            return fn(new Error("Parse Error"));
-          }
+          return fn(body);
         }
       });
     };
