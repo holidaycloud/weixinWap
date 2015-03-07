@@ -45,16 +45,16 @@
     };
 
     CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
-      return _getCustomerInfo(openid).done(function(customer) {
+      return _getCustomerInfo(openid).then(function(customer) {
         if (parseInt(sceneid) === 99999) {
           return _getCoupon(customer._id, "54fa5b5f7284d93d4a49a19a");
         } else {
           return _getCoupon(customer._id, "54fa82d751abf6d65a37dd37");
         }
-      }).done(function(coupon) {
+      }).then(function(coupon) {
         console.log("没有错误", coupon);
         return fn(null, coupon);
-      }).fail(function(err) {
+      })["catch"](function(err) {
         console.log("出错了", err);
         return fn(err);
       });
