@@ -77,7 +77,7 @@
             if ((res.error != null) === 1) {
               return deferred.reject(new Error(res.errMsg));
             } else {
-              return deferred.resolve(res);
+              return deferred.resolve(res.data);
             }
           } catch (_error) {
             error = _error;

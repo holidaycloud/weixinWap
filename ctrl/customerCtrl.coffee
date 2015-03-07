@@ -53,7 +53,7 @@ class CustomerCtrl
           if res.error? is 1
             deferred.reject new Error(res.errMsg)
           else
-            deferred.resolve res
+            deferred.resolve res.data
         catch error
           deferred.reject new Error("Parse Error")
     deferred.promise
