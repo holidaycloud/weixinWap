@@ -35,7 +35,7 @@ exports.msg = (req,res) ->
       deferred.promise
   ).then(
     (msgObj) ->
-      console.log msgObj
+      console.log "request:",msgObj
       deferred = Q.defer()
       if typeof WeixinCtrl[msgObj.xml.MsgType[0]] is "function"
         WeixinCtrl[msgObj.xml.MsgType[0]] msgObj,(err,results) ->
@@ -49,6 +49,7 @@ exports.msg = (req,res) ->
       deferred.promise
   ).then(
     (responseBody) ->
+      console.log "response:",responseBody
       res.send responseBody
   ).catch(
     (error) ->

@@ -65,7 +65,6 @@
     WeixinCtrl.event = function(msgObj, fn) {
       var eventType;
       eventType = msgObj.xml.Event[0];
-      console.log("" + eventType + " event");
       switch (eventType) {
         case "subscribe":
           return CustomerCtrl.weixinSubscribe(msgObj.xml.FromUserName[0], function(err, res) {
@@ -81,7 +80,6 @@
     };
 
     WeixinCtrl.text = function(msgObj, fn) {
-      console.log("say " + msgObj.xml.Content[0]);
       return fn(null, "");
     };
 

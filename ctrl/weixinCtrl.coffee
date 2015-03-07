@@ -28,7 +28,6 @@ class WeixinCtrl
 
   @event:(msgObj,fn) ->
     eventType = msgObj.xml.Event[0]
-    console.log "#{eventType} event"
     switch eventType
       when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
         fn err,res
@@ -37,7 +36,6 @@ class WeixinCtrl
       else fn null,""
 
   @text:(msgObj,fn) ->
-    console.log "say #{msgObj.xml.Content[0]}"
     fn null,""
 
 
