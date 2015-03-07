@@ -31,8 +31,19 @@ class WeixinCtrl
     switch eventType
       when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
         fn err,res
-      when "SCAN" then CustomerCtrl.weixinCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
-        fn err,res
+      when "SCAN" then CustomerCtrl.weixinCoupon msgObj.xml.FromUserName[0],msgObj.xml.EventKey[0],(err,res) ->
+        if err
+          fn null,"""
+                  <xml>
+                  <ToUserName><![CDATA[#{msgObj.xml.FromUserName[0]}]]></ToUserName>
+                  <FromUserName><![CDATA[#{msgObj.xml.ToUserName[0]}]]></FromUserName>
+                  <CreateTime>#{Date.now()}</CreateTime>
+                  <MsgType><![CDATA[text]]></MsgType>
+                  <Content><![CDATA[#{err.message}]]></Content>
+                  </xml>
+                  """
+        else
+          fn null,res
       else fn null,""
 
   @text:(msgObj,fn) ->

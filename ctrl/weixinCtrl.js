@@ -71,8 +71,12 @@
             return fn(err, res);
           });
         case "SCAN":
-          return CustomerCtrl.weixinCoupon(msgObj.xml.FromUserName[0], msgObj.xml.ToUserName[0], msgObj.xml.EventKey[0], function(err, res) {
-            return fn(err, res);
+          return CustomerCtrl.weixinCoupon(msgObj.xml.FromUserName[0], msgObj.xml.EventKey[0], function(err, res) {
+            if (err) {
+              return fn(null, "<xml>\n<ToUserName><![CDATA[" + msgObj.xml.FromUserName[0] + "]]></ToUserName>\n<FromUserName><![CDATA[" + msgObj.xml.ToUserName[0] + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[" + err.message + "]]></Content>\n</xml>");
+            } else {
+              return fn(null, res);
+            }
           });
         default:
           return fn(null, "");

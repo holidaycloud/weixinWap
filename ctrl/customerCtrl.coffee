@@ -18,16 +18,7 @@ class CustomerCtrl
         catch error
           fn new Error("Parse Error")
 
-  @weixinCoupon:(openid,form,sceneid,fn) ->
-#    fn null,"""
-#            <xml>
-#            <ToUserName><![CDATA[#{openid}]]></ToUserName>
-#            <FromUserName><![CDATA[#{form}]]></FromUserName>
-#            <CreateTime>#{Date.now()}</CreateTime>
-#            <MsgType><![CDATA[text]]></MsgType>
-#            <Content><![CDATA[你好#{sceneid}]]></Content>
-#            </xml>
-#            """
+  @weixinCoupon:(openid,sceneid,fn) ->
     _getCustomerInfo openid
     .then(
       (customer) ->
@@ -58,10 +49,8 @@ class CustomerCtrl
         try
           res = JSON.parse(body)
           if res.error is 1
-            console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
-            console.log "没错",res
             deferred.resolve res.data
         catch error
           deferred.reject new Error("Parse Error")
@@ -77,10 +66,8 @@ class CustomerCtrl
         try
           res = JSON.parse(body)
           if res.error is 1
-            console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
-            console.log "没错",res
             deferred.resolve res
         catch error
           deferred.reject new Error("Parse Error")
