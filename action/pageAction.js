@@ -122,4 +122,8 @@
     });
   };
 
+  exports.couponDetail = function(req, res) {
+    return res.render("couponDetail");
+  };
+
 }).call(this);

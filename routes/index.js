@@ -10,6 +10,8 @@
 
   router.get("/coupons", PageAction.coupons);
 
+  router.get("/couponDetail", PageAction.couponDetail);
+
   module.exports = router;
 
 }).call(this);

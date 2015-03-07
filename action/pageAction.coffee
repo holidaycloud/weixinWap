@@ -78,3 +78,6 @@ exports.coupons = (req,res) ->
   ).catch (err) ->
     console.log err
     res.status(500).end()
+
+exports.couponDetail = (req,res) ->
+  res.render "couponDetail"
