@@ -71,7 +71,6 @@ exports.coupons = (req,res) ->
       res.status(500).end()
   ).then(
     (coupons) ->
-      console.log coupons
       res.render "coupons",{coupons}
     (err) ->
       console.log err

@@ -110,7 +110,6 @@
       console.log(err);
       return res.status(500).end();
     }).then(function(coupons) {
-      console.log(coupons);
       return res.render("coupons", {
         coupons: coupons
       });

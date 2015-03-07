@@ -38,13 +38,14 @@
 <section>
     <div class="container" style="padding-top: 55px;">
         <%coupons.forEach(function(c){%>
-        <div class="row">
+        <div class="row" style="padding-bottom: 5px;">
             <div class="col-xs-12">
-                <a class="btn-link" href="#<%=c._id%>"><%=c.name%></a>
+                <a class="btn-link" href="/couponDetail?id=<%=c._id%>">
+                    <h3><%=c.name%></h3>
+                </a>
             </div>
         </div>
         <%})%>
-
     </div>
 </section>
 <!-- JavaScript Files -->
