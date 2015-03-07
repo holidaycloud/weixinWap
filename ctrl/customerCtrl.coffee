@@ -51,6 +51,7 @@ class CustomerCtrl
       else
         try
           res = JSON.parse(body)
+          console.log res.error,res.error is 1
           if res.error? is 1
             deferred.reject new Error(res.errMsg)
           else

@@ -75,6 +75,7 @@
         } else {
           try {
             res = JSON.parse(body);
+            console.log(res.error, res.error === 1);
             if ((res.error != null) === 1) {
               return deferred.reject(new Error(res.errMsg));
             } else {
