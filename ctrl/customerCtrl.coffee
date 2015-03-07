@@ -30,6 +30,7 @@ class CustomerCtrl
 #            """
     _getCustomerInfo openid
     .then (customer) ->
+      console.log "_getCustomerInfo():",customer
       if sceneid is 99999
         _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
       else
@@ -58,7 +59,6 @@ class CustomerCtrl
     deferred.promise
 
   _getCoupon = (customer,marketing) ->
-    console.log {ent:global.ent,customer,marketing}
     deferred = Q.defer()
     url = "#{config.inf.host}:#{config.inf.port}/api/coupon/give"
     request {url,timeout:3000,method:"POST",form:{ent:global.ent,customer,marketing}},(err,response,body) ->

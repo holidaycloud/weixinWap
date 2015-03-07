@@ -46,6 +46,7 @@
 
     CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
       return _getCustomerInfo(openid).then(function(customer) {
+        console.log("_getCustomerInfo():", customer);
         if (sceneid === 99999) {
           return _getCoupon(customer._id, "54fa5b5f7284d93d4a49a19a");
         } else {
@@ -89,11 +90,6 @@
 
     _getCoupon = function(customer, marketing) {
       var deferred, url;
-      console.log({
-        ent: global.ent,
-        customer: customer,
-        marketing: marketing
-      });
       deferred = Q.defer();
       url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/give";
       request({
