@@ -43,7 +43,7 @@
     };
 
     CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
-      return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + form + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[你好]]></Content>\n</xml>");
+      return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + form + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[你好" + sceneid + "]]></Content>\n</xml>");
     };
 
     _getCustomerInfo = function(openid) {

@@ -24,7 +24,7 @@ class CustomerCtrl
             <FromUserName><![CDATA[#{form}]]></FromUserName>
             <CreateTime>#{Date.now()}</CreateTime>
             <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA[你好]]></Content>
+            <Content><![CDATA[你好#{sceneid}]]></Content>
             </xml>
             """
 #    _getCustomerInfo openid
