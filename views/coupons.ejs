@@ -37,11 +37,14 @@
 </header>
 <section>
     <div class="container" style="padding-top: 55px;">
+        <%coupons.forEach(function(c){%>
         <div class="row">
             <div class="col-xs-12">
-                <a class="btn-link" href="#">XXXX优惠券</a>
+                <a class="btn-link" href="#<%=c._id%>"><%=c.name%></a>
             </div>
         </div>
+        <%})%>
+
     </div>
 </section>
 <!-- JavaScript Files -->
