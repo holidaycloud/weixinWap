@@ -1,5 +1,6 @@
 request = require "request"
 config = require "./../config/config.json"
+Q = require "q"
 class CustomerCtrl
 #public static method
   @weixinSubscribe:(openid,fn) ->
