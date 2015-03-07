@@ -71,12 +71,12 @@
     code = req.query.code;
     state = req.query.state;
     return _getOpenid(code).then(function(openid) {
-      console.log(openid);
+      console.log("openid:", openid);
       return _getCustomerInfo(openid);
     }, function(err) {
       return res.status(500).end();
     }).then(function(customer) {
-      console.log(customer);
+      console.log("customer:", customer);
       return res.render("coupons");
     }, function(err) {
       return res.status(500).end();

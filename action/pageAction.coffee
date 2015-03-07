@@ -42,13 +42,13 @@ exports.coupons = (req,res) ->
   state = req.query.state
   _getOpenid(code).then(
     (openid) ->
-      console.log openid
+      console.log "openid:",openid
       _getCustomerInfo(openid)
     ,(err) ->
       res.status(500).end()
   ).then(
     (customer) ->
-      console.log customer
+      console.log "customer:",customer
       res.render "coupons"
     ,(err) ->
       res.status(500).end()
