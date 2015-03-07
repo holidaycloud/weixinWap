@@ -43,7 +43,17 @@
     };
 
     CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
-      return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + form + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[你好" + sceneid + "]]></Content>\n</xml>");
+      return _getCustomerInfo(openid).then(function(customer) {
+        if (sceneid === 99999) {
+          return _getCoupon(customer._id, "54fa5b5f7284d93d4a49a19a");
+        } else {
+          return _getCoupon(customer._id, "54fa82d751abf6d65a37dd37");
+        }
+      }).then(function(coupon) {
+        return fn(null, coupon);
+      }).fail(function(err) {
+        return fn(err);
+      });
     };
 
     _getCustomerInfo = function(openid) {

@@ -50,7 +50,9 @@
       return deferred.promise;
     }).then(function(msgObj) {
       var deferred;
-      console.log("request:", msgObj);
+      if (global.isDebug) {
+        console.log("request:", msgObj);
+      }
       deferred = Q.defer();
       if (typeof WeixinCtrl[msgObj.xml.MsgType[0]] === "function") {
         WeixinCtrl[msgObj.xml.MsgType[0]](msgObj, function(err, results) {
@@ -66,7 +68,9 @@
       }
       return deferred.promise;
     }).then(function(responseBody) {
-      console.log("response:", responseBody);
+      if (global.isDebug) {
+        console.log("response:", responseBody);
+      }
       return res.send(responseBody);
     })["catch"](function(error) {
       console.log(error);

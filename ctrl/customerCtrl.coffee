@@ -18,25 +18,25 @@ class CustomerCtrl
           fn new Error("Parse Error")
 
   @weixinCoupon:(openid,form,sceneid,fn) ->
-    fn null,"""
-            <xml>
-            <ToUserName><![CDATA[#{openid}]]></ToUserName>
-            <FromUserName><![CDATA[#{form}]]></FromUserName>
-            <CreateTime>#{Date.now()}</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA[你好#{sceneid}]]></Content>
-            </xml>
-            """
-#    _getCustomerInfo openid
-#    .then (customer) ->
-#      if sceneid is 99999
-#        _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
-#      else
-#        _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
-#    .then (coupon) ->
-#      fn null,coupon
-#    .fail (err) ->
-#      fn err
+#    fn null,"""
+#            <xml>
+#            <ToUserName><![CDATA[#{openid}]]></ToUserName>
+#            <FromUserName><![CDATA[#{form}]]></FromUserName>
+#            <CreateTime>#{Date.now()}</CreateTime>
+#            <MsgType><![CDATA[text]]></MsgType>
+#            <Content><![CDATA[你好#{sceneid}]]></Content>
+#            </xml>
+#            """
+    _getCustomerInfo openid
+    .then (customer) ->
+      if sceneid is 99999
+        _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
+      else
+        _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
+    .then (coupon) ->
+      fn null,coupon
+    .fail (err) ->
+      fn err
 
 #private method
   _getCustomerInfo = (openid) ->
