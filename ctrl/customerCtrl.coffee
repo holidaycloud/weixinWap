@@ -36,18 +36,15 @@ class CustomerCtrl
         else
           _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
       ,(err) ->
-        console.log "出错了",err
         fn err
     )
     .then(
       (coupon) ->
         fn null,coupon
       ,(err) ->
-        console.log "出错了",err
         fn err
     )
     .catch (err) ->
-      console.log "出错了",err
       fn err
 
 #private method
@@ -61,8 +58,10 @@ class CustomerCtrl
         try
           res = JSON.parse(body)
           if res.error? is 1
+            console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
+            console.log "没错",res
             deferred.resolve res.data
         catch error
           deferred.reject new Error("Parse Error")
@@ -78,8 +77,10 @@ class CustomerCtrl
         try
           res = JSON.parse(body)
           if res.error? is 1
+            console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
+            console.log "没错",res
             deferred.resolve res
         catch error
           deferred.reject new Error("Parse Error")

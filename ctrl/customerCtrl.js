@@ -52,15 +52,12 @@
           return _getCoupon(customer._id, "54fa82d751abf6d65a37dd37");
         }
       }, function(err) {
-        console.log("出错了", err);
         return fn(err);
       }).then(function(coupon) {
         return fn(null, coupon);
       }, function(err) {
-        console.log("出错了", err);
         return fn(err);
       })["catch"](function(err) {
-        console.log("出错了", err);
         return fn(err);
       });
     };
@@ -81,8 +78,10 @@
           try {
             res = JSON.parse(body);
             if ((res.error != null) === 1) {
+              console.log("有错", res.errMsg);
               return deferred.reject(new Error(res.errMsg));
             } else {
+              console.log("没错", res);
               return deferred.resolve(res.data);
             }
           } catch (_error) {
@@ -115,8 +114,10 @@
           try {
             res = JSON.parse(body);
             if ((res.error != null) === 1) {
+              console.log("有错", res.errMsg);
               return deferred.reject(new Error(res.errMsg));
             } else {
+              console.log("没错", res);
               return deferred.resolve(res);
             }
           } catch (_error) {
