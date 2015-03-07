@@ -55,7 +55,7 @@
         return fn(err);
       }).then(function(coupon) {
         console.log(coupon);
-        return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + from + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[news]]></MsgType>\n<ArticleCount>1</ArticleCount>\n<Articles>\n<item>\n<Title><![CDATA[您获得一张优惠券]]></Title>\n<Description><![CDATA[" + coupon.data.name + "]]></Description>\n<PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>\n<Url><![CDATA[http://test.meitrip.net/]]></Url>\n</item>\n</Articles>\n</xml>");
+        return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + from + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[news]]></MsgType>\n<ArticleCount>1</ArticleCount>\n<Articles>\n<item>\n<Title><![CDATA[您获得一张优惠券]]></Title>\n<Description><![CDATA[" + coupon.data.name + "]]></Description>\n<PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>\n<Url><![CDATA[http://test.meitrip.net/coupons]]></Url>\n</item>\n</Articles>\n</xml>");
       }, function(err) {
         return fn(err);
       })["catch"](function(err) {
