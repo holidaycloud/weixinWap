@@ -77,7 +77,7 @@
         } else {
           try {
             res = JSON.parse(body);
-            if ((res.error != null) === 1) {
+            if (res.error === 1) {
               console.log("有错", res.errMsg);
               return deferred.reject(new Error(res.errMsg));
             } else {
@@ -113,7 +113,7 @@
         } else {
           try {
             res = JSON.parse(body);
-            if ((res.error != null) === 1) {
+            if (res.error === 1) {
               console.log("有错", res.errMsg);
               return deferred.reject(new Error(res.errMsg));
             } else {

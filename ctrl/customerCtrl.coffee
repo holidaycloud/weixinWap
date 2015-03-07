@@ -57,7 +57,7 @@ class CustomerCtrl
       else
         try
           res = JSON.parse(body)
-          if res.error? is 1
+          if res.error is 1
             console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
@@ -76,7 +76,7 @@ class CustomerCtrl
       else
         try
           res = JSON.parse(body)
-          if res.error? is 1
+          if res.error is 1
             console.log "有错",res.errMsg
             deferred.reject new Error(res.errMsg)
           else
