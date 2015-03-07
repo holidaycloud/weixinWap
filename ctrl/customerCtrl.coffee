@@ -31,7 +31,7 @@ class CustomerCtrl
     )
     .then(
       (coupon) ->
-
+        console.log coupon
         fn null,"""
                 <xml>
                 <ToUserName><![CDATA[#{openid}]]></ToUserName>
