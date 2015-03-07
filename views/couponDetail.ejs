@@ -34,7 +34,7 @@
                     <%if(coupon.type==0){%>
                     金额券&nbsp;&nbsp;价值<%=coupon.value%>元
                     <%} else if(coupon.type==1){%>
-                    折扣券&nbsp;&nbsp;<%=(1-coupon.value)*100%>%OFF
+                    折扣券&nbsp;&nbsp;<%=Math.ceil(1-coupon.value)*100%>%OFF
                     <%} else if(coupon.type==2){%>
                     产品固定价格
                     <%} else if(coupon.type==3){%>
