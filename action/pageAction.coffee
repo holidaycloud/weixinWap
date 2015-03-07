@@ -43,7 +43,7 @@ exports.coupons = (req,res) ->
   _getOpenid(code).then(
     (openid) ->
       console.log "openid:",openid
-      _getCustomerInfo(openid)
+      _getCustomerInfo(openid.openid)
     ,(err) ->
       res.status(500).end()
   ).then(

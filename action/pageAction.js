@@ -72,7 +72,7 @@
     state = req.query.state;
     return _getOpenid(code).then(function(openid) {
       console.log("openid:", openid);
-      return _getCustomerInfo(openid);
+      return _getCustomerInfo(openid.openid);
     }, function(err) {
       return res.status(500).end();
     }).then(function(customer) {
