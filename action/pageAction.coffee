@@ -54,6 +54,23 @@ _getCoupons = (customer) ->
         deferred.reject new Error("Parse Error")
   deferred.promise
 
+_couponDetail = (id) ->
+  deferred = Q.defer()
+  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/detail?id=#{id}"
+  request {url,timeout:3000,method:"GET"},(err,response,body) ->
+    if err
+      deferred.reject err
+    else
+      try
+        res = JSON.parse(body)
+        if res.error is 1
+          deferred.reject new Error(res.errMsg)
+        else
+          deferred.resolve res.data
+      catch error
+        deferred.reject new Error("Parse Error")
+  deferred.promise
+
 exports.coupons = (req,res) ->
   code = req.query.code
   state = req.query.state
@@ -80,4 +97,15 @@ exports.coupons = (req,res) ->
     res.status(500).end()
 
 exports.couponDetail = (req,res) ->
-  res.render "couponDetail"
+  id = req.query.id
+  _couponDetail(id).then(
+    (coupon) ->
+      console.log coupon
+      res.render "couponDetail",{coupon}
+    ,(err) ->
+      console.log err
+      res.status(500).end()
+  )
+
+
+
