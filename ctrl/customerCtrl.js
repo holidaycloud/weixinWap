@@ -51,9 +51,14 @@
         } else {
           return _getCoupon(customer._id, "54fa82d751abf6d65a37dd37");
         }
+      }, function(err) {
+        console.log("出错了", err);
+        return fn(err);
       }).then(function(coupon) {
-        console.log("没有错误", coupon);
         return fn(null, coupon);
+      }, function(err) {
+        console.log("出错了", err);
+        return fn(err);
       })["catch"](function(err) {
         console.log("出错了", err);
         return fn(err);
@@ -109,7 +114,6 @@
         } else {
           try {
             res = JSON.parse(body);
-            console.log(res.error, res.error === 1);
             if ((res.error != null) === 1) {
               return deferred.reject(new Error(res.errMsg));
             } else {

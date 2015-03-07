@@ -29,14 +29,23 @@ class CustomerCtrl
 #            </xml>
 #            """
     _getCustomerInfo openid
-    .then (customer) ->
-      if parseInt(sceneid) is 99999
-        _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
-      else
-        _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
-    .then (coupon) ->
-      console.log "没有错误",coupon
-      fn null,coupon
+    .then(
+      (customer) ->
+        if parseInt(sceneid) is 99999
+          _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
+        else
+          _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
+      ,(err) ->
+        console.log "出错了",err
+        fn err
+    )
+    .then(
+      (coupon) ->
+        fn null,coupon
+      ,(err) ->
+        console.log "出错了",err
+        fn err
+    )
     .catch (err) ->
       console.log "出错了",err
       fn err
@@ -68,7 +77,6 @@ class CustomerCtrl
       else
         try
           res = JSON.parse(body)
-          console.log res.error,res.error is 1
           if res.error? is 1
             deferred.reject new Error(res.errMsg)
           else
