@@ -47,7 +47,7 @@
     CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
       return _getCustomerInfo(openid).then(function(customer) {
         console.log("_getCustomerInfo():", customer);
-        if (sceneid === 99999) {
+        if (parseInt(sceneid) === 99999) {
           return _getCoupon(customer._id, "54fa5b5f7284d93d4a49a19a");
         } else {
           return _getCoupon(customer._id, "54fa82d751abf6d65a37dd37");

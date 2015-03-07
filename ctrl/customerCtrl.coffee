@@ -31,7 +31,7 @@ class CustomerCtrl
     _getCustomerInfo openid
     .then (customer) ->
       console.log "_getCustomerInfo():",customer
-      if sceneid is 99999
+      if parseInt(sceneid) is 99999
         _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
       else
         _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
