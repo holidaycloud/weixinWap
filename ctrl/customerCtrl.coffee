@@ -18,7 +18,7 @@ class CustomerCtrl
         catch error
           fn new Error("Parse Error")
 
-  @weixinCoupon:(openid,sceneid,fn) ->
+  @weixinCoupon:(openid,from,sceneid,fn) ->
     _getCustomerInfo openid
     .then(
       (customer) ->
@@ -31,7 +31,24 @@ class CustomerCtrl
     )
     .then(
       (coupon) ->
-        fn null,coupon
+
+        fn null,"""
+                <xml>
+                <ToUserName><![CDATA[#{openid}]]></ToUserName>
+                <FromUserName><![CDATA[#{from}]]></FromUserName>
+                <CreateTime>#{Date.now()}</CreateTime>
+                <MsgType><![CDATA[news]]></MsgType>
+                <ArticleCount>1</ArticleCount>
+                <Articles>
+                <item>
+                <Title><![CDATA[您获得一张优惠券]]></Title>
+                <Description><![CDATA[您获得一张优惠券]]></Description>
+                <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
+                <Url><![CDATA[http://test.meitrip.net/]]></Url>
+                </item>
+                </Articles>
+                </xml>
+                """
       ,(err) ->
         fn err
     )

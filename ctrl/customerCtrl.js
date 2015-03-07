@@ -44,7 +44,7 @@
       });
     };
 
-    CustomerCtrl.weixinCoupon = function(openid, sceneid, fn) {
+    CustomerCtrl.weixinCoupon = function(openid, from, sceneid, fn) {
       return _getCustomerInfo(openid).then(function(customer) {
         if (parseInt(sceneid) === 99999) {
           return _getCoupon(customer._id, "54fa5b5f7284d93d4a49a19a");
@@ -54,7 +54,7 @@
       }, function(err) {
         return fn(err);
       }).then(function(coupon) {
-        return fn(null, coupon);
+        return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + from + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[news]]></MsgType>\n<ArticleCount>1</ArticleCount>\n<Articles>\n<item>\n<Title><![CDATA[您获得一张优惠券]]></Title>\n<Description><![CDATA[您获得一张优惠券]]></Description>\n<PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>\n<Url><![CDATA[http://test.meitrip.net/]]></Url>\n</item>\n</Articles>\n</xml>");
       }, function(err) {
         return fn(err);
       })["catch"](function(err) {
