@@ -37,19 +37,45 @@ _getCustomerInfo = (openid) ->
         deferred.reject new Error("Parse Error")
   deferred.promise
 
+_getCoupons = (customer) ->
+  deferred = Q.defer()
+  url = "#{config.inf.host}:#{config.inf.port}/api/coupon/customerCoupons?ent=#{global.ent}&customer=#{customer}&status=0"
+  request {url,timeout:3000,method:"GET"},(err,response,body) ->
+    if err
+      deferred.reject err
+    else
+      try
+        res = JSON.parse(body)
+        if res.error is 1
+          deferred.reject new Error(res.errMsg)
+        else
+          deferred.resolve res.data
+      catch error
+        deferred.reject new Error("Parse Error")
+  deferred.promise
+
 exports.coupons = (req,res) ->
   code = req.query.code
   state = req.query.state
   _getOpenid(code).then(
     (openid) ->
-      console.log "openid:",openid
       _getCustomerInfo(openid.openid)
     ,(err) ->
+      console.log err
       res.status(500).end()
   ).then(
     (customer) ->
-      console.log "customer:",customer
-      res.render "coupons"
+      _getCoupons(customer._id)
     ,(err) ->
+      console.log err
       res.status(500).end()
-  )
+  ).then(
+    (coupons) ->
+      console.log coupons
+      res.render "coupons",{coupons}
+    (err) ->
+      console.log err
+      res.status(500).end()
+  ).catch (err) ->
+    console.log err
+    res.status(500).end()
