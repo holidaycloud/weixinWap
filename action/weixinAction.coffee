@@ -22,7 +22,7 @@ exports.msg = (req,res) ->
       deferred.resolve _data
     req.on "error",(e) ->
       deferred.reject e
-    deferred.promise;
+    deferred.promise
 
   bodyReader().then(
     (data) ->

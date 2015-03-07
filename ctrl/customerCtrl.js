@@ -7,6 +7,8 @@
   config = require("./../config/config.json");
 
   CustomerCtrl = (function() {
+    var _getCoupon, _getCustomerInfo;
+
     function CustomerCtrl() {}
 
     CustomerCtrl.weixinSubscribe = function(openid, fn) {
@@ -38,6 +40,73 @@
           }
         }
       });
+    };
+
+    CustomerCtrl.weixinCoupon = function(openid, form, sceneid, fn) {
+      return fn(null, "<xml>\n<ToUserName><![CDATA[" + openid + "]]></ToUserName>\n<FromUserName><![CDATA[" + form + "]]></FromUserName>\n<CreateTime>" + (Date.now()) + "</CreateTime>\n<MsgType><![CDATA[text]]></MsgType>\n<Content><![CDATA[你好]]></Content>\n</xml>");
+    };
+
+    _getCustomerInfo = function(openid) {
+      var deferred, url;
+      deferred = Q.defer();
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/customer/weixinLogin?ent=" + global.ent + "&openId=" + openid;
+      request({
+        url: url,
+        timeout: 3000,
+        method: "GET"
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return deferred.reject(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return deferred.reject(new Error(res.errMsg));
+            } else {
+              return deferred.resolve(res);
+            }
+          } catch (_error) {
+            error = _error;
+            return deferred.reject(new Error("Parse Error"));
+          }
+        }
+      });
+      return deferred.promise;
+    };
+
+    _getCoupon = function(customer, marketing) {
+      var deferred, url;
+      deferred = Q.defer();
+      url = "" + config.inf.host + ":" + config.inf.port + "/api/coupon/give";
+      request({
+        url: url,
+        timeout: 3000,
+        method: "POST",
+        form: {
+          ent: global.ent,
+          customer: customer,
+          marketing: marketing
+        }
+      }, function(err, response, body) {
+        var error, res;
+        if (err) {
+          return deferred.reject(err);
+        } else {
+          try {
+            res = JSON.parse(body);
+            if ((res.error != null) === 1) {
+              return deferred.reject(new Error(res.errMsg));
+            } else {
+              return deferred.resolve(res);
+            }
+          } catch (_error) {
+            error = _error;
+            return deferred.reject(new Error("Parse Error"));
+          }
+        }
+      });
+      return deferred.promise;
     };
 
     return CustomerCtrl;

@@ -1,6 +1,7 @@
 request = require "request"
 config = require "./../config/config.json"
 CustomerCtrl = require "./customerCtrl"
+Q = require "q"
 class WeixinCtrl
   @check:(signature,timestamp,nonce,echostr,fn) ->
     url = "#{config.weixin.host}:#{config.weixin.port}/weixin/#{global.ent}?signature=#{signature}&timestamp=#{timestamp}&nonce=#{nonce}&echostr=#{echostr}"
@@ -30,7 +31,8 @@ class WeixinCtrl
     console.log "#{eventType} event"
     switch eventType
       when "subscribe" then CustomerCtrl.weixinSubscribe msgObj.xml.FromUserName[0],(err,res) ->
-        console.log err,res
+        fn err,res
+      when "SCAN" then CustomerCtrl.weixinCoupon msgObj.xml.FromUserName[0],msgObj.xml.ToUserName[0],msgObj.xml.EventKey[0],(err,res) ->
         fn err,res
       else fn null,""
 
