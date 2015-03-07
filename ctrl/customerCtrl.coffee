@@ -29,12 +29,12 @@ class CustomerCtrl
 #            </xml>
 #            """
     _getCustomerInfo openid
-    .then (customer) ->
+    .done (customer) ->
       if parseInt(sceneid) is 99999
         _getCoupon customer._id,"54fa5b5f7284d93d4a49a19a"
       else
         _getCoupon customer._id,"54fa82d751abf6d65a37dd37"
-    .then (coupon) ->
+    .done (coupon) ->
       console.log "没有错误",coupon
       fn null,coupon
     .fail (err) ->
