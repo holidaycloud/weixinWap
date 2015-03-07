@@ -11,7 +11,7 @@ class CustomerCtrl
       else
         try
           res = JSON.parse(body)
-          if res.error? is 1
+          if res.error is 1
             fn new Error(res.errMsg)
           else
             fn null,res
