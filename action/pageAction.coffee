@@ -124,11 +124,10 @@ exports.couponDetail = (req,res) ->
   )
 
 exports.couponuse = (req,res) ->
-  console.log req.header("userAgent")
+  console.log req.headers["user-agent"]
   id = req.query.id
   _couponUse(id).then(
     (coupon) ->
-      console.log coupon
       res.render "useResult",{result:true,coupon}
     ,(err) ->
       res.render "useResult",{result:false,message:err.message}
