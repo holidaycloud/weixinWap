@@ -43,7 +43,7 @@ class CustomerCtrl
                 <Title><![CDATA[您获得一张优惠券]]></Title>
                 <Description><![CDATA[#{coupon.data.name}]]></Description>
                 <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
-                <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon._id}]]></Url>
+                <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon.data._id}]]></Url>
                 </item>
                 </Articles>
                 </xml>
