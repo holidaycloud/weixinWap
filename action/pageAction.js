@@ -198,19 +198,25 @@
 
   exports.couponuse = function(req, res) {
     var id;
-    console.log(req.headers["user-agent"]);
-    id = req.query.id;
-    return _couponUse(id).then(function(coupon) {
-      return res.render("useResult", {
-        result: true,
-        coupon: coupon
+    if (req.headers["user-agent"].indexOf("MicroMessenger") > -1) {
+      id = req.query.id;
+      return _couponUse(id).then(function(coupon) {
+        return res.render("useResult", {
+          result: true,
+          coupon: coupon
+        });
+      }, function(err) {
+        return res.render("useResult", {
+          result: false,
+          message: err.message
+        });
       });
-    }, function(err) {
+    } else {
       return res.render("useResult", {
         result: false,
-        message: err.message
+        message: "请使用微信扫一扫"
       });
-    });
+    }
   };
 
 }).call(this);

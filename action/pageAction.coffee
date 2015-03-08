@@ -124,13 +124,15 @@ exports.couponDetail = (req,res) ->
   )
 
 exports.couponuse = (req,res) ->
-  console.log req.headers["user-agent"]
-  id = req.query.id
-  _couponUse(id).then(
-    (coupon) ->
-      res.render "useResult",{result:true,coupon}
-    ,(err) ->
-      res.render "useResult",{result:false,message:err.message}
-  )
+  if req.headers["user-agent"].indexOf("MicroMessenger")>-1
+    id = req.query.id
+    _couponUse(id).then(
+      (coupon) ->
+        res.render "useResult",{result:true,coupon}
+      ,(err) ->
+        res.render "useResult",{result:false,message:err.message}
+    )
+  else
+    res.render "useResult",{result:false,message:"请使用微信扫一扫"}
 
 
