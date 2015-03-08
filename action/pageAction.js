@@ -198,6 +198,7 @@
 
   exports.couponuse = function(req, res) {
     var id;
+    console.log(req.header("userAgent"));
     id = req.query.id;
     return _couponUse(id).then(function(coupon) {
       console.log(coupon);

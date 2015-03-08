@@ -124,6 +124,7 @@ exports.couponDetail = (req,res) ->
   )
 
 exports.couponuse = (req,res) ->
+  console.log req.header("userAgent")
   id = req.query.id
   _couponUse(id).then(
     (coupon) ->
