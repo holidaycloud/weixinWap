@@ -12,6 +12,8 @@
 
   router.get("/couponDetail", PageAction.couponDetail);
 
+  router.get("/couponuse", PageAction.couponuse);
+
   module.exports = router;
 
 }).call(this);
