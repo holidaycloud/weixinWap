@@ -31,7 +31,6 @@ class CustomerCtrl
     )
     .then(
       (coupon) ->
-        console.log coupon
         fn null,"""
                 <xml>
                 <ToUserName><![CDATA[#{openid}]]></ToUserName>
@@ -44,7 +43,7 @@ class CustomerCtrl
                 <Title><![CDATA[您获得一张优惠券]]></Title>
                 <Description><![CDATA[#{coupon.data.name}]]></Description>
                 <PicUrl><![CDATA[http://test.meitrip.net/images/coupon.jpg]]></PicUrl>
-                <Url><![CDATA[http://test.meitrip.net/coupons]]></Url>
+                <Url><![CDATA[http://test.meitrip.net/couponDetail?id=#{coupon._id}]]></Url>
                 </item>
                 </Articles>
                 </xml>
