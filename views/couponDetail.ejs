@@ -29,7 +29,8 @@
         <div class="col-xs-12">
             <div class="center-block">
                 <h3><%=coupon.name%></h3>
-                <img src="http://qr.liantu.com/api.php?logo=http://test.meitrip.net/images/logo.png&text=http://test.meitrip.net/couponuse?id=<%=coupon._id%>" class="img-responsive">
+                <%=url%>
+                <img src="<%=url%>" class="img-responsive">
                 <h5>
                     <%if(coupon.type==0){%>
                     金额券&nbsp;&nbsp;价值<%=coupon.value%>元

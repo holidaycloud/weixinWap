@@ -1,7 +1,7 @@
 request = require "request"
 config = require "./../config/config.json"
 Q = require "q"
-
+QRCode = require "qrcode"
 #private method
 _getOpenid = (code) ->
   deferred = Q.defer()
@@ -71,6 +71,15 @@ _couponDetail = (id) ->
         deferred.reject new Error("Parse Error")
   deferred.promise
 
+_createQrcode = (id) ->
+  deferred = Q.defer()
+  QRCode.toDataURI "http://test.meitrip.net/couponuse?id=#{id}",(err,url) ->
+    if err
+      deferred.reject err
+    else
+      deferred.resolve url
+  deferred.promise
+
 _couponUse = (id) ->
   deferred = Q.defer()
   url = "#{config.inf.host}:#{config.inf.port}/api/coupon/scanUse"
@@ -115,9 +124,17 @@ exports.coupons = (req,res) ->
 
 exports.couponDetail = (req,res) ->
   id = req.query.id
-  _couponDetail(id).then(
+  url=""
+  _createQrcode(id).then(
+    (u) ->
+      url = u
+      _couponDetail(id)
+    ,(err) ->
+      console.log err
+      res.status(500).end()
+  ).then(
     (coupon) ->
-      res.render "couponDetail",{coupon}
+      res.render "couponDetail",{coupon,url}
     ,(err) ->
       console.log err
       res.status(500).end()
